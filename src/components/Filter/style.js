@@ -20,6 +20,7 @@ Icons.Filter = styled(filter)`
 `;
 Icons.Houses = styled(houses)`
   margin-right: 8px;
+  margin-top: 5px;
 `;
 
 const MenuWrapper = styled.div`
