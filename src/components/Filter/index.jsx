@@ -46,9 +46,10 @@ export const Filter = () => {
       />
 
       <Dropdown
-      overlay={menu}
+        overlay={menu}
         placement="bottomRight"
         arrow={{ pointAtCenter: true }}
+        trigger={['click']}
       >
         <div>
           <Button type={"light"}>

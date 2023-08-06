@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink, Outlet, useNavigate} from 'react-router-dom'
+import {Outlet, useNavigate} from 'react-router-dom'
 import {Container, Link, Logo, Main, Section, Wrapper} from "./style";
 import {navbar} from "../../utils/navbar";
 import Button from "../Generic/Button";
