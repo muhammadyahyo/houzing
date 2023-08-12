@@ -17,12 +17,12 @@ const Container = styled.div`
   /* border-radius: 3px;
   border: 1px solid var(--border-color, #e6e9ec);
   background: var(--color-5, #fff); */
-  margin: 100px;
 `;
 
 const Img = styled.img`
   width: 100%;
   max-height: 220px;
+  min-height: 220px;
 `;
 const Content = styled.div`
   display: flex;
