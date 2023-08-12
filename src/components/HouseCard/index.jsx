@@ -8,7 +8,7 @@ export const HouseCard = ({data ={}}) => {
   const {address,city,country,description,houseDetails,salePrice,price,attachments} = data;
   return (
     <Container>
-      <Img src={attachments&&attachments[0]?.imgPath || noimg} /> {/* attachments[0]?.imgPath || */}
+      <Img src={(attachments && attachments[0]?.imgPath) || noimg} /> {/* attachments[0]?.imgPath || */}
       <Content>
         <div className="subTitle inline">
           {city || "New Apartment Nice Wiew"}, {country}, {description} 
