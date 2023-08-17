@@ -2,12 +2,12 @@ import React from "react";
 import { Blur, Container, Content, Img } from "./style";
 import category from "../../assets/img/category.png";
 
-export const CategoryCard = ({ data = {} }) => {
+export const CategoryCard = ({onClick, data = {} }) => {
   const {
    name
   } = data;
   return (
-    <Container>
+    <Container onClick={onClick}>
       <Img src={category} />{" "}
       {/* attachments[0]?.imgPath || */}
       <Blur/>
