@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import { ReactComponent as bed } from "../../assets/icons/bed.svg";
-import { ReactComponent as bath } from "../../assets/icons/bath.svg";
-import { ReactComponent as garage } from "../../assets/icons/car.svg";
 
 const Container = styled.div`
   border-radius: 3px;

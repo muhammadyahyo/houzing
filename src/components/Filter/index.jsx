@@ -33,7 +33,7 @@ export const Filter = () => {
         method: "GET",
         headers: {
           "Content-Type": 'application/json',
-          'Authorization': 'Bearer ' + `${token}`,
+          'Authorization': `Bearer ${token}`,
       }
       })
         .then((res) => res.json())
@@ -41,12 +41,14 @@ export const Filter = () => {
           setData(res?.data || []);
           
         });
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(()=>{
       let [d] = data?.filter((ctg)=> ctg.id === Number(query.get('category_id')))
       d?.name && setValue(d?.name)
       !query.get('category_id') && setValue('Select Category')
+       // eslint-disable-next-line react-hooks/exhaustive-deps
     },[location?.search, data])
 
   const onChange = ({target: {name, value}}) => {
