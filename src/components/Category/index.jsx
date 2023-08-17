@@ -1,5 +1,5 @@
 import React , { useEffect, useState}from 'react'
-import {  Container,  } from './style'
+import {  Container, Content } from './style'
 // import { Carousel } from 'antd';
 import CategoryCard from '../CategoryCard'
 import Slider from "react-slick";
@@ -11,7 +11,7 @@ const settings = {
   className: "center",
   centerMode: true,
   infinite: true,
-  centerPadding: "10px",
+  centerPadding: "-10px",
   slidesToShow: 4,
   speed: 500,
   arrows: true,
@@ -43,13 +43,25 @@ export const Category = () => {
     }, []);
   return (
     <Container>
-        <Slider {...settings}>
-          {
-            data.map(value => {
-              return <CategoryCard onClick={()=> navigate(`/properties?category=${value?.name}`)} data={value}/>
-            })
-          }       
-        </Slider> 
+         <Container>
+      <Content>
+        <h1 className="title">Category</h1>
+        <div className="info">
+          Nulla quis curabitur velit volutpat auctor bibendum consectetur sit.
+        </div>
+      </Content>
+      <Slider {...settings}>
+        {data.map((value) => {
+          return (
+            <CategoryCard
+              key={value.id}
+              onClick={() => navigate(`/properties?category_id=${value.id}`)}
+              data={value}
+            />
+          );
+        })}
+      </Slider>
+    </Container> 
         
     </Container>
   )

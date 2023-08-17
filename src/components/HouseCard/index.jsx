@@ -13,7 +13,7 @@ export const HouseCard = ({data ={}}) => {
         <div className="subTitle inline">
           {city || "New Apartment Nice Wiew"}, {country}, {description} 
         </div>
-        <div className="info">{address || "Quincy St, Brooklyn, NY, USA"} - {category?.name || 'Category'}</div>
+        <div className="info">{address || "Quincy St, Brooklyn, NY, USA"} - {category?.name || 'Category'} {houseDetails?.room || 0}-rooms</div>
         <Details>
           <Details.Item>
             <Icons.Bed />
