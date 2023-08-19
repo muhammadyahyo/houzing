@@ -9,13 +9,19 @@ import { ReactComponent as resize } from "../../assets/icons/resize.svg";
 const Container = styled.div`
   width: 100%;
   max-width: 380px;
-  min-width: 343px;
+  min-width: 330px;
   height: 429px;
   height: 100%;
+  /* margin: ${({ gap }) => gap && `0 ${gap}px`}; */
+  background: white;
+  border: 1px solid #e6e9ec;
 
-  filter: drop-shadow(0px 20px 38px rgba(0, 0, 0, 0.06))
-    drop-shadow(0px 7px 46px rgba(0, 0, 0, 0.06))
-    drop-shadow(0px 8px 15px rgba(0, 0, 0, 0.06));
+  &:hover {
+    filter: drop-shadow(0px 20px 38px rgba(0, 0, 0, 0.06))
+      drop-shadow(0px 7px 46px rgba(0, 0, 0, 0.06))
+      drop-shadow(0px 8px 15px rgba(0, 0, 0, 0.06));
+  }
+  cursor: pointer;
 
   /* border-radius: 3px;
   border: 1px solid var(--border-color, #e6e9ec);
