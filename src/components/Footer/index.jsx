@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Container, Content, Icon, Section, } from './style'
+import {  Container, Content, Icon } from './style'
 
 
 export const Footer = () => {
