@@ -23,7 +23,7 @@ export const Filter = () => {
   const minPriceRef = useRef()
   const maxPriceRef = useRef()
 
-  console.log(Number(query.get('category_id')), 'id');
+  // console.log(Number(query.get('category_id')), 'id');
 
   const [data, setData] = useState([])
   const [value, setValue] = useState('Select Category')

@@ -4,10 +4,10 @@ import  noimg  from "../../assets/img/noimg.jpeg";
 
 
 
-export const HouseCard = ({data ={}, gap}) => {
+export const HouseCard = ({data ={}, gap, onClick}) => {
   const {address,city,country,description,houseDetails,salePrice,price,attachments, category} = data;
   return (
-    <Container gap={gap}>
+    <Container gap={gap} onClick={onClick}>
       <Img src={(attachments && attachments[0]?.imgPath) || noimg} /> {/* attachments[0]?.imgPath || */}
       <Content>
         <div className="subTitle inline">

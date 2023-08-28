@@ -19,6 +19,7 @@ body{
   /* Padding */
 
   --padding: 0 130px;
+  --width: 1440px;
 }
 
 .title{
