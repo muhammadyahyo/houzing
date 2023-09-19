@@ -62,7 +62,7 @@ export const MyProfile = () => {
       title: "Listing Title",
       key: 'name',
       render: (data) => <User>
-        <User.Img src={data?.attachments && data?.attachments[0]?.imgPath || noimg}/>
+        <User.Img src={data?.attachments && (data?.attachments[0]?.imgPath || noimg)}/>
         <User flex={"true"}>
           <div className="subTitle">{data?.country}, {data?.address}</div>
           <div className="info">{data?.city}, {data?.region}</div>

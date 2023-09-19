@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from 'react'
 import { Wrapper, MenuWrapper,Section, SelectAnt, IconDelete } from './style'
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import { Button, Input } from '../Generic';
 import { useFormik } from 'formik';
 import { Checkbox } from 'antd';
@@ -12,7 +12,7 @@ export const AddNewHouse = () => {
   const [imgs, setImgs] = useState([])
   const [category, setCategory] = useState([])
   const [img, setImg] = useState('')
-  const {search} = useLocation()
+  // const {search} = useLocation()
   const request = useRequest();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -30,17 +30,18 @@ export const AddNewHouse = () => {
   });
   
   useEffect(() => {
-    id &&
-      request({ url: `/houses/id/${id}`, token: true }).then((res) => {
+    id && request({ url: `/houses/id/${id}`, token: true }).then((res) => {
         setImgs(res?.data?.attachments);
         setInitail({...res?.data})
-      });
+      })
+       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
   useEffect(() => {
     request({ url: `/categories/list` ,token:true}).then((res) =>
       setCategory(res?.data || [])
     );
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
  
@@ -69,10 +70,10 @@ export const AddNewHouse = () => {
     },
   });
   const addImg =()=>{
-    if(!(imgs >= 4) && img){
+    
       setImgs([...imgs, { imgPath: img, id: `${img.length * Math.random()}${img}$` }, ]);
       setImg("");
-    }
+    
   }
 
 
@@ -204,7 +205,7 @@ export const AddNewHouse = () => {
               onChange={({ target: { value } }) => setImg(value)}
               placeholder="Add Image URL"
             />
-            <Button type={"button"} onClick={addImg} disabled={imgs.length >= 4}>
+            <Button type={"button"} onClick={addImg} >
               Add Image URL
             </Button>
           </Section>

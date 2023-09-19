@@ -1,6 +1,6 @@
 import { Select } from "antd";
 import styled from "styled-components";
-import { ReactComponent as edit } from "../../assets/icons/edit.svg";
+// import { ReactComponent as edit } from "../../assets/icons/edit.svg";
 import { ReactComponent as del } from "../../assets/icons/delete.svg";
 
 const Wrapper = styled.div`

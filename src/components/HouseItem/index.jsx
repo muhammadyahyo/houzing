@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import {  Container, Content, Description, Details, Hr, Icons, Location, Section, User, Wrapper } from './style'
+import {  Blur, Container, Content, Description, Details, Hr, Icons, ImgContainer, Location, Section, User, Wrapper } from './style'
 import { Input, Button, Yandex } from "../Generic";
-import { Checkbox } from 'antd';
+import { Checkbox, Modal, Carousel } from 'antd';
 import nouser from "../../assets/img/nouser.jpeg";
 import Recent from "../Recent";
+import noimg from "../../assets/img/noimg.jpeg";
 
 const {REACT_APP_BASE_URL: url, REACT_APP_CLIENT_TOKEN: token} = process.env
 
 export const HouseItem = () => {
    const [data, setData] = useState({})
    const params = useParams()
+
+   // Modal Antd
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const showModal = () => {
+     setIsModalOpen(true);
+   };
+   const handleOk = () => {
+     setIsModalOpen(false);
+   };
+   const handleCancel = () => {
+     setIsModalOpen(false);
+   };
    
    console.log(params, 'params');
 
@@ -34,8 +47,49 @@ export const HouseItem = () => {
   //   request({url: `/houses/id/${params?.id}`}).then((res)=> setData(res?.data || []))
   // },[params?.id])
  
+  let a = data?.attachments?.length
+  
+  const onChange = (currentSlide) => {
+    console.log(currentSlide);
+  };
+
   return (
     <React.Fragment>
+      <ImgContainer>
+        <ImgContainer.Main
+         width ={  a === 1 && "width" }
+         src={(data?.attachments && data?.attachments[0]?.imgPath) || noimg} alt="test" />
+        <ImgContainer.Wrapper>
+          {data?.attachments &&
+            data?.attachments?.slice(1, 5).map((value, index) => {
+              return data?.attachments?.length > 5 && index === 3 ? (
+                <Blur.Container>
+                  <ImgContainer.Subimg
+                    key={value.id}
+                    src={value?.imgPath}
+                    alt="test"
+                  />
+                  <Blur onClick={showModal}>+{data?.attachments?.length - 5}</Blur>
+                      <Modal  title="Photos" centered open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                          <Carousel afterChange={onChange}>
+                            {
+                              data?.attachments?.map((vl) => {
+                                return <ImgContainer.Carousel key={vl.id} src={vl?.imgPath} />
+                              })
+                            }
+                          </Carousel>
+                      </Modal>
+                </Blur.Container>
+              ) : (
+                <ImgContainer.Subimg
+                  key={value.id}
+                  src={value?.imgPath}
+                  alt="test"
+                />
+              );
+            })}
+        </ImgContainer.Wrapper>
+      </ImgContainer>
       <Wrapper>
         <Container flex={3}>
           <Section>
@@ -64,10 +118,10 @@ export const HouseItem = () => {
               </Details.Item>
               <Icons.Ruler />
               <Details.Item>{data?.houseDetails?.area || 0} Sq Ft</Details.Item>
-              <Icons.Calendar />
-              <Details.Item>
+              {/* <Icons.Calendar />
+              {/* <Details.Item>
                 Year Built: {data?.houseDetails?.yearBuilt || null}
-              </Details.Item>
+              </Details.Item> */} 
             </Details>
             <Content>
               <Content flex={"true"}>
@@ -193,120 +247,112 @@ export const HouseItem = () => {
         <Content.Title>Feature</Content.Title>
       </Wrapper>
       <Wrapper>
-          <Section style={{width: '100%'}}>
-            <Section>
-              <Container gap={25}>
-                <Content flex={'true'}>
-                  <Icons.Bed />
-                  <Details.Item>
-                    Air Conditioning {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Garage />
-                  <Details.Item>
-                    Barbeque {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Bed />
-                  <Details.Item>
-                    Dryer {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Ruler />
-                  <Details.Item>
-                    Gym {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-              </Container>
-            </Section>
-            <Section>
+        <Section style={{ width: "100%" }}>
+          <Section>
             <Container gap={25}>
-                <Content flex={'true'}>
-                  <Icons.Bed />
-                  <Details.Item>
-                    Air Conditioning {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Garage />
-                  <Details.Item>
-                    Barbeque {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Bed />
-                  <Details.Item>
-                    Dryer {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Ruler />
-                  <Details.Item>
-                    Gym {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-              </Container>
-            </Section>
-            <Section>
-            <Container gap={25}>
-                <Content flex={'true'}>
-                  <Icons.Bed />
-                  <Details.Item>
-                    Air Conditioning {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Garage />
-                  <Details.Item>
-                    Barbeque {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Bed />
-                  <Details.Item>
-                    Dryer {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Ruler />
-                  <Details.Item>
-                    Gym {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-              </Container>
-            </Section>
-            <Section>
-            <Container gap={25}>
-                <Content flex={'true'}>
-                  <Icons.Bed />
-                  <Details.Item>
-                    Air Conditioning {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Garage />
-                  <Details.Item>
-                    Barbeque {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Bed />
-                  <Details.Item>
-                    Dryer {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-                <Content flex={'true'}>
-                  <Icons.Ruler />
-                  <Details.Item>
-                    Gym {data?.houseDetails?.beds || 0}
-                  </Details.Item>
-                </Content>
-              </Container>
-            </Section>
+              <Content flex={"true"}>
+                <Icons.Bed />
+                <Details.Item>
+                  Air Conditioning {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Garage />
+                <Details.Item>
+                  Barbeque {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Bed />
+                <Details.Item>
+                  Dryer {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Ruler />
+                <Details.Item>Gym {data?.houseDetails?.beds || 0}</Details.Item>
+              </Content>
+            </Container>
           </Section>
+          <Section>
+            <Container gap={25}>
+              <Content flex={"true"}>
+                <Icons.Bed />
+                <Details.Item>
+                  Air Conditioning {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Garage />
+                <Details.Item>
+                  Barbeque {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Bed />
+                <Details.Item>
+                  Dryer {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Ruler />
+                <Details.Item>Gym {data?.houseDetails?.beds || 0}</Details.Item>
+              </Content>
+            </Container>
+          </Section>
+          <Section>
+            <Container gap={25}>
+              <Content flex={"true"}>
+                <Icons.Bed />
+                <Details.Item>
+                  Air Conditioning {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Garage />
+                <Details.Item>
+                  Barbeque {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Bed />
+                <Details.Item>
+                  Dryer {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Ruler />
+                <Details.Item>Gym {data?.houseDetails?.beds || 0}</Details.Item>
+              </Content>
+            </Container>
+          </Section>
+          <Section>
+            <Container gap={25}>
+              <Content flex={"true"}>
+                <Icons.Bed />
+                <Details.Item>
+                  Air Conditioning {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Garage />
+                <Details.Item>
+                  Barbeque {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Bed />
+                <Details.Item>
+                  Dryer {data?.houseDetails?.beds || 0}
+                </Details.Item>
+              </Content>
+              <Content flex={"true"}>
+                <Icons.Ruler />
+                <Details.Item>Gym {data?.houseDetails?.beds || 0}</Details.Item>
+              </Content>
+            </Container>
+          </Section>
+        </Section>
       </Wrapper>
       <Recent />
     </React.Fragment>

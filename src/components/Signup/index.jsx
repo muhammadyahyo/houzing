@@ -2,11 +2,11 @@ import React , { useState}from 'react'
 import {  Content } from './style'
 import { useNavigate } from 'react-router-dom';
 import { Input, Button } from "../Generic";
-import {useRequest} from '../../hooks/useRequest'
+// import {useRequest} from '../../hooks/useRequest'
 import {  message  } from 'antd';
 
 export const Signup = () => {
-    const request = useRequest() 
+    // const request = useRequest() 
     const [body, setBody] = useState({})
     const navigate = useNavigate()
 
