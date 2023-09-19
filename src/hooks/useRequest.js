@@ -6,7 +6,14 @@ export const useRequest = () => {
   const warning = (err) => {
     message.warning(err || "Something went wrong");
   };
-  const request = async ({ me, url, method = "GET", body, token, headers }) => {
+  const request = async ({
+    me,
+    url,
+    method = "GET",
+    body,
+    token,
+    headers = {},
+  }) => {
     if (token)
       headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
 

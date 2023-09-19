@@ -1,11 +1,36 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Container, Content, Details, Divider, Icons, Img } from './style'
 import  noimg  from "../../assets/img/noimg.jpeg";
+import { message } from 'antd';
+import { PropertiesContext } from '../../context/properties';
+
+
+const {REACT_APP_BASE_URL: url} = process.env
 
 
 
 export const HouseCard = ({data ={}, gap, onClick}) => {
-  const {address,city,country,description,houseDetails,salePrice,price,attachments, category} = data;
+  const [{refetch}] = useContext(PropertiesContext)
+  const {address,city,country,description,houseDetails,salePrice,price,attachments, category, favorite, id} = data;
+
+
+
+  const save =(event)=>{
+    event?.stopPropagation()
+    fetch(`${url}/houses/addFavourite/${id}?favourite=${!favorite}`,{
+      method: "PUT",
+      headers: {
+        "Content-Type": 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    }
+    }).then((res) => res.json())
+    .then((res) => {
+      if(favorite) res?.success && message.warning('Successfully disliked')
+      else res?.success && message.info('Successfully liked')
+      refetch && refetch()
+    })
+
+  }
   return (
     <Container gap={gap} onClick={onClick}>
       <Img src={(attachments && attachments[0]?.imgPath) || noimg} /> {/* attachments[0]?.imgPath || */}
@@ -43,7 +68,7 @@ export const HouseCard = ({data ={}, gap, onClick}) => {
         </Details.Item>
         <Details.Item row="true">
           <Icons.Resize />
-          <Icons.Love />
+          <Icons.Love onClick={save} favorite={favorite}/>
         </Details.Item>
       </Content>
     </Container>

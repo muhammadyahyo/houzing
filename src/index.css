@@ -64,3 +64,6 @@ body{
 .slick-dots-bottom {
   width: inherit !important;
 }
+.ant-checkbox-wrapper, .ant-checkbox-wrapper{
+  margin-left: 0px!important;
+}

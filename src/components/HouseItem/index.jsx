@@ -29,10 +29,11 @@ export const HouseItem = () => {
       window.scrollTo(0,0)
     })
    },[params?.id])
-console.log(data);
+   console.log(data);
   // useEffect(()=>{
   //   request({url: `/houses/id/${params?.id}`}).then((res)=> setData(res?.data || []))
   // },[params?.id])
+ 
   return (
     <React.Fragment>
       <Wrapper>

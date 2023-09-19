@@ -46,6 +46,9 @@ const Container = styled.button`
   height: ${({ height }) => (height ? `${height}px` : "44px")};
   width: ${getWidth};
 
+  opacity: ${({ disabled }) => (disabled ? 0.7 : 1)};
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+
   cursor: pointer;
   ${getType}
   &:active {
